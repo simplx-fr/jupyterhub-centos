@@ -8,11 +8,11 @@ MAINTAINER Nicolas Duval <nicolas.duval@simplx.fr>
 # install Python with conda, utf8 locale
 RUN localedef -c -f UTF-8 -i en_US en_US.UTF-8 && \
     yum -y install wget bzip2 openssl openssl-devel git && \
-    wget --quiet http://repo.continuum.io/archive/Anaconda3-2.5.0-Linux-x86_64.sh -O /tmp/Anaconda3-2.5.0-Linux-x86_64.sh && \
-    chmod +x /tmp/Anaconda3-2.5.0-Linux-x86_64.sh && \
-    /tmp/Anaconda3-2.5.0-Linux-x86_64.sh -b -p /opt/conda && \
-    /opt/conda/bin/pip install --upgrade pip && \
-    rm -f /tmp/*
+    wget https://repo.continuum.io/miniconda/Miniconda3-3.9.1-Linux-x86_64.sh -O /tmp/miniconda.sh && \
+    chmod +x /tmp/miniconda.sh && \
+    bash /tmp/miniconda.sh -f -b -p /opt/conda && \
+    /opt/conda/bin/conda install --yes python=3.5 sqlalchemy tornado jinja2 traitlets requests pip && \
+    /opt/conda/bin/pip install --upgrade pip
 
 ENV PATH=/opt/conda/bin:$PATH
 ENV LANG=en_US.UTF-8
